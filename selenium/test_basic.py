@@ -55,8 +55,5 @@ class TestApp(TestBasic):
             print(str(ex))
             pytest.fail()
         r = self.browser.find_element_by_name("result")
-        print dir(r)
-        print r
-        #result = "result: 30 + 35 = 65"
-        # pytest.raises(Exception, call, args)
+        assert r.text == "result: 30 + 35 = 65"
 

@@ -37,7 +37,8 @@ class RequestHandler(webapp2.RequestHandler):
                 s = int(x) + int(y)
             except ValueError:
                 s = "error"
-            self.response.out.write("result: %s + %s = %s" % (x, y, s))
+            self.response.out.write("<div name=\"result\">"
+                                    "result: %s + %s = %s</div>" % (x, y, s))
         self.response.out.write("</body></html>")
 
 

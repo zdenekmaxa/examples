@@ -1,3 +1,4 @@
 .idea/
 *.pyc
 .datastore
+__pycache__

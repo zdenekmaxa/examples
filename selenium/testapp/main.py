@@ -20,7 +20,7 @@ class RequestHandler(webapp2.RequestHandler):
         self.response.out.write("<br /><br /><center><h3>" + msg +
                                 "</h3></center>")
         form = ("<div><br />Enter numbers to sum:<br />\n" 
-                "<form action=\"\">\n"
+                "<form action=\"\" method=\"post\">\n"
                 "<input type=\"text\" value=\"\" size=\"10\" name=\"x\">\n"
                 "<span>+</span>\n"
                 "<input type=\"text\" value=\"\" size=\"10\" name=\"y\">\n"
@@ -28,9 +28,10 @@ class RequestHandler(webapp2.RequestHandler):
                 "<input type=\"submit\" value=\"Sum numbers\"></form>\n"
                 "<br /><br />")
         self.response.out.write(form)
+        # arguments are read out the same regardless of the method
         x = self.request.get("x", None)
         y = self.request.get("y", None)
-        log.debug("entered values: x='%s' y='%s'")
+        log.debug("entered values: x='%s' y='%s'" % (x, y))
         if x and y:
             try:
                 s = int(x) + int(y)
@@ -44,7 +45,7 @@ routes = [
     webapp2.Route(r"/",
                   handler="main.RequestHandler:index",
                   name="index",
-                  methods=["GET", ]),
+                  methods=["GET", "POST"]),
 ]
 
 

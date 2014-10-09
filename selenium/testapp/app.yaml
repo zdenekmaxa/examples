@@ -1,0 +1,33 @@
+application: xmax-testapp
+version: v01
+runtime: python27
+api_version: 1
+threadsafe: true
+
+default_expiration: "1s"
+
+libraries:
+  - name: webapp2
+    version: latest
+  - name: pycrypto
+    version: latest
+
+
+skip_files:
+  - ^(.*/)?#.*#
+  - ^(.*/)?.*~
+  - ^(.*/)?.*\.py[co]
+  - ^(.*/)?.*\.sw[op]
+  - ^(.*/)?.*/RCS/.*
+  - ^(.*/)?\..*
+  - ^app/bower_components/.*
+  - ^node_modules/.*
+
+
+handlers:
+  - url: /.*
+    script: main.app
+    secure: always
+    # necessary, otherwise, even if logged in,
+    # users.get_current_user() responds None
+    login: required

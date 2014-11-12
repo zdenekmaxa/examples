@@ -27,9 +27,10 @@ catkin_create_pkg ros_pub_sub std_msgs rospy
 
 #### Development
 
-```
-cd ros/src/ros_pub_sub/src
+from the main `ros` directory:
 
+```
+cd src/ros_pub_sub/src
 ```
 
 Put codes in this directory. Tutorials tend put Python codes into
@@ -39,7 +40,7 @@ Put codes in this directory. Tutorials tend put Python codes into
 #### Build ROS package
 
 ```
-cd ros
+cd ros  # the main project root directory
 catkin_make
 ```
 

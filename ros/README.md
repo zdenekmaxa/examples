@@ -75,6 +75,21 @@ source devel/setup.bash
 rosrun ros_pub_sub subscriber.py
 ```
 
+##### ROS launch
+
+Automated way of running multiple ROS nodes (and roscore) at once. 
+
+```
+cd ros
+roslaunch pub_sub.launch
+```
+
+And another session (if `pub_sub.launch` doesn't do that already):
+
+```
+rosrun ros_pub_sub subscriber.py
+```
+
 
 Without creating the package, `rosrun` would complain it can't find
 the package. Then the Python codes has to be in the package tree, otherwise

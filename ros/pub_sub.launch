@@ -1,0 +1,4 @@
+<launch>
+    <node name="publisher" pkg="ros_pub_sub" type="publisher.py" output="screen"/>
+</launch>
+

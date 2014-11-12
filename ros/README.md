@@ -34,7 +34,9 @@ cd src/ros_pub_sub/src
 ```
 
 Put codes in this directory. Tutorials tend put Python codes into
-`scripts` directory, doesn't seem to matter. 
+`scripts` directory, doesn't seem to matter.
+Larger projects have Python codes in the `scripts` directory,
+C++ codes in the `src` directory.
 
 
 #### Build ROS package

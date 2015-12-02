@@ -10,7 +10,7 @@ import pytest
 from django.db import connection
 
 import settings
-from pollsapp.models import Question
+from pollsapp.models import Question, Choice
 from factories import QuestionFactory, ChoiceFactory
 
 # this is the name of the database as defined in the settings.py file
@@ -73,12 +73,25 @@ class TestAdvanced(object):
         for managing test data by means of test factory objects.
 
         """
-        q = QuestionFactory.create()  # does save()
+        QuestionFactory.create()  # does save()
         qs = Question.objects.filter(question_text__startswith="What is your name?")
         assert len(qs) == 1
         qs.delete()
-        q = QuestionFactory.build()  # does not save()
+        q = QuestionFactory.build()  # does not do save()
         qs = Question.objects.filter(question_text__startswith="What is your name?")
         assert len(qs) == 0
-        print QuestionFactory.create
-        #q = QuestionFactory.create()  # does save()
+        # pass different field value
+        q = QuestionFactory.build(question_text="Favourite meal?")
+        qs = Question.objects.all()
+        # is not yet saved
+        assert len(qs) == 2
+        q.save()
+        qs = Question.objects.all()
+        # it's saved now
+        assert len(qs) == 3
+
+    def test_subfactory_and_filter_chain(self):
+        qt = "What?"
+        ChoiceFactory.create(question__question_text=qt)
+        chos = Choice.objects.filter(choice_text="Babice").filter(question__question_text=qt)
+        assert len(chos) == 1

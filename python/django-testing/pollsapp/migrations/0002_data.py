@@ -24,7 +24,7 @@ def fill_in_data(apps, schema_editor):
                  pub_date=datetime.datetime(year=2015, month=11, day=29))
     q.save()
 
-    print "Model 'Question' data insert OK"
+    print "migration: model 'Question' data insert OK"
 
 
 class Migration(migrations.Migration):

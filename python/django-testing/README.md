@@ -83,8 +83,22 @@ Set up schema for the requisite Django components (as defined in `settings.py`):
 
 # Testing
 
-For testing Django we use [py.test](http://pytest.org/).
+The main test framework is [py.test](http://pytest.org/).
 
+The database server needs to be up and running prior running the test suite.
+
+Running the test suite:
+
+```bash
+source venv/bin/activate
+py.test -vv -rfsX -s tests
+```
+
+The command will look up only in the `test` directory and won't pick up
+all the test files from Django, etc from the `venv` directory.
+
+It's either necessary to set `export DJANGO_SETTINGS_MODULE="settings"`
+or use the `pytest.ini` file with the same setting.
 
 
 # Assorted notes

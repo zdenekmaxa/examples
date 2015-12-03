@@ -63,7 +63,7 @@ DATABASES = {
         'NAME':     'myapp_experiment',
         'ENGINE':   'django.db.backends.postgresql_psycopg2',  # sqlite3, postgresql_psycopg2
         'USER':     'myapp_user',
-        'PASSWORD': 'VERY_c0nfid3nti1l',
+        'PASSWORD': 'my_very_secret_password',
         'HOST':     'localhost',
         'PORT':     '5432',
     }

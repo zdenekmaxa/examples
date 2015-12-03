@@ -1,9 +1,8 @@
 """
-Data view.
+Views definitions.
 
 """
 
-import json
 import datetime
 
 from django.http import HttpResponse, HttpResponseNotFound

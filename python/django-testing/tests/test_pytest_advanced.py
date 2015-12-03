@@ -1,13 +1,14 @@
 """
-Module with pytest style advanced findings / observations.
+Module with pytest style advanced findings, observations, references.
 
 """
 
-
+import json
 import datetime
 
 import pytest
 from django.db import connection
+from django.test import Client
 
 import settings
 from pollsapp.models import Question, Choice
@@ -95,3 +96,38 @@ class TestAdvanced(object):
         ChoiceFactory.create(question__question_text=qt)
         chos = Choice.objects.filter(choice_text="Babice").filter(question__question_text=qt)
         assert len(chos) == 1
+
+
+@pytest.fixture
+def client():
+    """
+    Retuns HTTP client to test API calls.
+
+    """
+    c = Client()
+    return c
+
+
+class TestAPICalls(object):
+    """
+    Test API calls.
+
+    """
+    def test_datetime(self, client):
+        r = client.get("/datetime/")
+        assert r.status_code == 200
+        assert r.content.startswith("current time")
+
+    @pytest.mark.django_db
+    def test_questions(self, client):
+        r = client.get("/questions/")
+        assert r.status_code == 200
+        resp = json.loads(r.content)
+        assert len(resp) > 0  # based on data added in migrations
+
+    @pytest.mark.django_db
+    def test_questions(self, client):
+        r = client.get("/question/1")
+        assert r.status_code == 200
+        resp = json.loads(r.content)
+        assert len(resp) == 1  # based on data added in migrations

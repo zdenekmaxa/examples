@@ -1,6 +1,9 @@
 """
 Create your models here.
+
 Taken from the Django tutorial.
+
+Very self-explanatory.
 
 """
 

@@ -5,7 +5,7 @@ Django minimal example application and testing experiments.
 
 # Requirements
 
-`VENV` - environmental variable containing the virtual environment path
+`VIRT_ENV_DIR` - environmental variable containing the virtual environment path
 
 `PROJECT_ROOT_DIR` - top project root directory
 
@@ -13,14 +13,14 @@ Django minimal example application and testing experiments.
 
 - pip
 
-Once the virtual environment is installed, set it up in the `VENV` directory:
+Once the virtual environment is installed, set it up in the `VIRT_ENV_DIR` directory:
  
-- `virtualenv venv`
+- `virtualenv $VIRT_ENV_DIR`
 
 activate it and verify:
 
 - `source $ENV/bin/activate`
-- `which pip` - points to the `VENV` directory
+- `which pip` - points to the `VIRT_ENV_DIR` directory
 - `python -c "import django; print(django.get_version())"`
 
 Install requirements:
@@ -68,7 +68,7 @@ psql myapp_experiment
 On the opened PostgreSQL console:
 
 ```
-create user myapp_user with password 'VERY_c0nfid3nti1l';
+create user myapp_user with password 'my_very_secret_password';
 alter database myapp_experiment owner to myapp_user;
 alter user myapp_user CREATEDB;  # will be creating databases during testing
 ```
@@ -95,7 +95,7 @@ py.test -vv -rfsX -s tests
 ```
 
 The command will look up only in the `test` directory and won't pick up
-all the test files from Django, etc from the `venv` directory.
+all the test files from Django, etc from the `VIRT_ENV_DIR` directory.
 
 It's either necessary to set `export DJANGO_SETTINGS_MODULE="settings"`
 or use the `pytest.ini` file with the same setting.

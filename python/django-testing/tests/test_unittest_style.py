@@ -20,6 +20,7 @@ Run via:
 import datetime
 
 from django.test import TestCase
+
 from pollsapp.models import Question
 
 
@@ -33,9 +34,9 @@ class QuestionTestCase(TestCase):
         Test that the model entity added in set up method is present.
 
         """
-        qs = Question.objects.all()
-        for q in qs:
-            if "How are you?" == q.question_text:
-                break
-        else:
+        t = "How are you?"
+        try:
+            q = Question.objects.get(question_text=t)
+        except Question.DoesNotExist:
             self.fail("The entity created in setup is not present in the database.")
+        assert q.question_text == t

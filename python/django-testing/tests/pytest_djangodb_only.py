@@ -56,12 +56,15 @@ class TestSetupTeardown(object):
         assert len(qs) == 3
 
     def teardown_method(self, method):
-        return
+        qs = Question.objects.all()
         # this call will fail with: Failed: Database access not allowed, use the "django_db" mark to enable
         # although the decorator is there
-        qs = Question.objects.all()
+        #return
+        # interestingly, it won't fail on the above call but on this one:
+        len(qs)
 
     @classmethod
     def teardown_class(cls):
-        return
         qs = Question.objects.all()
+        return
+        len(qs)

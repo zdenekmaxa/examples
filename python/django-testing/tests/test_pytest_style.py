@@ -33,14 +33,14 @@ class TestQuestion(object):
         """
         # as opposed to unittest which created this object in setUp(),
         # create it here at the test case itself
-        Question.objects.create(question_text="How are you?",
+        t = "How are you?"
+        Question.objects.create(question_text=t,
                                 pub_date=datetime.datetime(year=2015, month=11, day=28))
-        qs = Question.objects.all()
-        for q in qs:
-            if "How are you?" == q.question_text:
-                break
-        else:
+        try:
+            q = Question.objects.get(question_text=t)
+        except Question.DoesNotExist:
             pytest.fail("The entity created in setup is not present in the database.")
+        assert q.question_text == t
 
     @pytest.mark.skipif(True,
                         reason="Need to redefine arithmetic first. Tracked on a ticket #XX")
@@ -62,11 +62,11 @@ def test_model_basic_function():
     """
     # as opposed to unittest which created this object in setUp(),
     # create it here at the test case itself
-    Question.objects.create(question_text="How are you?",
+    t = "How are you?"
+    Question.objects.create(question_text=t,
                             pub_date=datetime.datetime(year=2015, month=11, day=28))
-    qs = Question.objects.all()
-    for q in qs:
-        if "How are you?" == q.question_text:
-            break
-    else:
+    try:
+        q = Question.objects.get(question_text=t)
+    except Question.DoesNotExist:
         pytest.fail("The entity created in setup is not present in the database.")
+    assert q.question_text == t

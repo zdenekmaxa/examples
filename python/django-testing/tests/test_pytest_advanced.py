@@ -65,7 +65,7 @@ class TestAdvanced(object):
         qs = Question.objects.filter(question_text__startswith="How are you?")
         assert len(qs) == 0
         # useful Model._meta
-        assert q._meta.get_all_field_names() == ['choice', u'id', 'pub_date', 'question_text']
+        assert sorted(q._meta.get_all_field_names()) == sorted(['choice', u'id', 'pub_date', 'question_text'])
         assert q._meta.model_name == "question"
 
     def test_with_factories(self):

@@ -8,7 +8,6 @@ import datetime
 
 import pytest
 from django.db import connection
-from django.test import Client
 
 import settings
 from pollsapp.models import Question, Choice
@@ -98,19 +97,11 @@ class TestAdvanced(object):
         assert len(chos) == 1
 
 
-@pytest.fixture
-def client():
-    """
-    Retuns HTTP client to test API calls.
-
-    """
-    c = Client()
-    return c
-
-
 class TestAPICalls(object):
     """
     Test API calls.
+
+    Uses client pytest fixture.
 
     """
     def test_datetime(self, client):
@@ -126,7 +117,7 @@ class TestAPICalls(object):
         assert len(resp) > 0  # based on data added in migrations
 
     @pytest.mark.django_db
-    def test_questions(self, client):
+    def test_question(self, client):
         r = client.get("/question/1")
         assert r.status_code == 200
         resp = json.loads(r.content)

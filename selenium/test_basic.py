@@ -39,7 +39,7 @@ class TestApp(TestBasic):
 
             # if some options, e.g. extensions paths are to be loaded
             op = webdriver.ChromeOptions()
-            self.browser = webdriver.Chrome(executable_path="./chromedriver-2.11",
+            self.browser = webdriver.Chrome(executable_path="opt/chromedriver/chromedriver",
                                             chrome_options=op)
         else:
             self.browser = webdriver.Firefox()

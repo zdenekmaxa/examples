@@ -1,0 +1,76 @@
+https://chesterli0130.wordpress.com/2012/10/04/four-major-principles-of-object-oriented-programming-oop/
+
+new operator:
+http://stackoverflow.com/questions/1646698/what-is-the-new-keyword-in-javascript
+https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/new
+
+
+-JS classes - theory, then objects examples
+    no classes in JS, just objects (functions are first class objects)
+    in OOP theory classes and object go together. not true in JS
+
+
+-ES6 'class' keyword (p68)
+    see Appendix A
+
+-JS has objects, yet classes doen't exist in JS. class-object relation from
+    other languages, the two bind via instantiation which is a class's
+    constructor call. classes in JS don't exist.
+    classes in JS: illusion, extra effort, class-like syntax, fight against,
+        landmine, fake, source of gotchas and pain
+        there are no classes in JS to instantiate, just objects (function is
+            an object ...)
+    in JS - simulating JS attributes
+        -abstraction
+        -encapculation / access control
+        -inheritance
+        -polymorphism - behaviour (called method) changes according to
+            instance
+
+    JS - object based lang, as opposed to Python - OOP, procedural, func 
+        or Java - OOP (though not everything in Java is necessarily class)
+
+
+-in Java (to contrast): everything is a class [not entirely true]
+
+-basic principles of OOP - in a very wordy manner, stuff very obvious when
+    having Java, Python background
+    e.g. long epxlanantion on instantiation process, class-object (instance)
+        relation
+
+-constructor in Java name: the same as the object, can have overridden
+    (overloaded) constructors (should read Java notes)
+    in Python: __init__() [can also have multiple __init__ methods?]
+    for explanation uses pseudocode - try that stuff in Python
+
+-multiple inheritance - no, devs fake it
+       
+-p83 all the bending just to set this context
+
+mixing - to create links among objects to achieve "inheritance" (so that one
+    objects knows about functions from another ...)
+
+
+
+Chapter Review
+--------------
+
+class theory
+mixins in various forms
+
+mixing - to create links among objects to achieve "inheritance" (so that one
+    objects knows about functions from another ...)
+
+Lots of discouraged language bending to set object context in order to achive
+desired OOP features.
+
+In general, faking classes in JS often set more landmines for future coding
+than solving present real problems.
+
+
+To quote Brian Kernighan:
+"Debugging is twice as hard as writing the code in the first place.
+Therefore, if you write the code as cleverly as possible, you are, by
+definition, not smart enough to debug it."
+
+

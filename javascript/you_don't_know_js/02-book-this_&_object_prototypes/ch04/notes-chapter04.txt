@@ -1,3 +1,8 @@
+Chapter 04 - Mixing (Up) "Class" Objects
+
+=============================================================================
+
+
 https://chesterli0130.wordpress.com/2012/10/04/four-major-principles-of-object-oriented-programming-oop/
 
 new operator:

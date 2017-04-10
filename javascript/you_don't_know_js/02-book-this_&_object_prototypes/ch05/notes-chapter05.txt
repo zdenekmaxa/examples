@@ -1,0 +1,84 @@
+Chapter 5 - Prototypes
+
+=============================================================================
+
+-why is the prototype chain designated [[Prototype]] ?
+    denoted in the specification as [[Prototype]]
+    simply a reference to another object
+
+-getter description - like in Python (dunder) __get__
+    states that it's a Javascript community ivention.
+
+-var myObject = Object.create( anotherObject );
+    we have myObject that is now [[Prototype]] linked to another Object
+    prototype is another object (linkeage object) inside of an object
+
+-access to prototype
+    .prototype
+    .__proto__ -> examples
+        __proto__ doesn't actually exist on the object inspected but exists
+        on the built-in Object.prototype along with the other common utilities
+        (.toString())
+
+-assignment silently ignored - most suprising behaviour
+
+-using of shadowing - discouraged
+
+-In fact, JavaScript is almost unique among languages as perhaps the only
+    language with the right to use the label "object oriented", because
+    it's one of a very short list of languages where an object can be
+    created directly, without a class at all.
+    In JavaScript, classes can't (being that they don't exist!) describe what
+    an object can do. The object defines its own behavior directly. There's
+    just the object.
+
+-explain change of logging - 03-class_function.js
+
+-The word "inheritance" has a very strong meaning (see Chapter 4), with plenty
+    of mental precedent. Merely adding "prototypal" in front to distinguish
+    the actually nearly opposite behavior in JavaScript has left in its wake
+    nearly two decades of miry confusion.
+    it originates in the lack of definition / specification
+
+-continues lots of anti class-oriented ranting
+
+-In other words, in JavaScript, it's most appropriate to say that a
+    "constructor" is any function called with the new keyword in front of it.
+    Functions aren't constructors, but function calls are "constructor calls"
+    if and only if new is used.
+
+-07 example - behaviour not understood ; check "constructor" function
+    prototype modifiability once some "instance" are created
+
+-isPrototypeOf()
+-getPrototypeOf()
+
+-Javascript's [[Prototype]] mechanism is not like classes. It creates links
+    between objects.    
+
+-Object.create(null) - creates new object with empty prototype. used for pure
+    data storage objects
+
+-Object.create() - added in ES5
+    polyfilled - approaches are techniques to implement that functionality in
+    pre-ES5 env
+    example creates a new object whose prototype IS the object in the argument
+    .hasOwnProperty()
+    polyfilling - implementing later functionality to the env which doesn't
+    support it. partial polyfill - implementing just partial functionality
+
+
+While these JavaScript mechanisms can seem to resemble "class instantiation"
+and "class inheritance" from traditional class-oriented languages, the key
+distinction is that in JavaScript, no copies are made. Rather, objects end up
+linked to each other via an internal [[Prototype]] chain.
+
+For a variety of reasons, not the least of which is terminology precedent,
+"inheritance" (and "prototypal inheritance") and all the other OO terms just
+do not make sense when considering how JavaScript actually works (not just
+applied to our forced mental models).
+
+Instead, "delegation" is a more appropriate term, because these relationships
+are not copies but delegation links.
+
+

@@ -15,7 +15,8 @@ console.log("\nprototype on function object via new");
 var o = new Obj();
 console.log(o.prototype); // undefined
 console.log(o.__proto__);
-console.log(Obj.prototype === o.__proto__);
+console.log(Obj.prototype === o.__proto__); // true
+console.log(Obj === o.__proto__); // false
 
 console.log("\nprototype on object via create");
 var o = Object.create(Obj);
@@ -24,6 +25,7 @@ console.log(o.__proto__);
 console.log(o.prototype === o.__proto__); // false
 console.log(Obj.prototype === o.prototype); // true
 console.log(Obj.prototype === o.__proto__); // false
+console.log(Obj === o.__proto__); // true
 
 console.log("\nchange of log output (string operations):\n");
 

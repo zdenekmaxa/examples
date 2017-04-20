@@ -2,6 +2,15 @@ Chapter 5 - Prototypes
 
 =============================================================================
 
+https://www.w3schools.com/js/js_object_prototypes.asp
+
+-Every JavaScript object has a prototype. The prototype is also an object.
+    All JavaScript objects inherit their properties and methods from their
+    prototype.
+    Objects created using an object literal, or with new Object(),
+    inherit from a prototype called Object.prototype
+
+
 -why is the prototype chain designated [[Prototype]] ?
     denoted in the specification as [[Prototype]]
     simply a reference to another object
@@ -9,7 +18,7 @@ Chapter 5 - Prototypes
 -getter description - like in Python (dunder) __get__
     states that it's a Javascript community ivention.
 
--var myObject = Object.create( anotherObject );
+-var myObject = Object.create(anotherObject);
     we have myObject that is now [[Prototype]] linked to another Object
     prototype is another object (linkeage object) inside of an object
 

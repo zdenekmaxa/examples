@@ -1,0 +1,142 @@
+Chapter 03 - Objects
+
+=============================================================================
+
+additional reading:
+
+new primitive type called Symbol:
+MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol
+Mozilla Symbol developer's explanation: https://hacks.mozilla.org/2015/06/es6-in-depth-symbols/
+http://softwareengineering.stackexchange.com/questions/149555/difference-between-immutable-and-const
+
+
+-----------------------------------------------------------------------------
+
+-2 ways of defining an object - literal syntax and constructed form (from
+    Object) - result is the same, literal syntax a lot more common (shorter)
+
+-language types: 
+    string
+    number
+    boolean
+    null
+    undefined
+    object
+
+    simple primitives (string, number, boolean, null, and undefined) are
+    not themselves objects. null is its own primitive type.
+    bug in the language which causes typeof null to return the string
+    "object" incorrectly (and confusingly)
+
+-It's a common mis-statement that "everything in JavaScript is an object".
+    This is clearly not true.
+
+-function is a sub-type of object (technically, a "callable object").
+    Functions in JS are said to be "first class" in that they are basically
+    just normal objects (with callable behavior semantics bolted on)
+
+-Built-in Objects
+    String
+    Number
+    Boolean
+    Object
+    Function
+    Array
+    Date
+    RegExp
+    Error
+
+-var strPrimitive = "I am a string";
+ Object.prototype.toString.call( strObject );
+ .call defined on functions - this way can call a function a give it some
+    other context (for "this" binding)
+
+-access to properties
+    myObject.a;	 // "property" access
+    myObject["a"]; // "key" access ; the only way programatically defined ones
+
+-property names are always strings. If you use any other value besides a
+    string (primitive) as the property, it will first be converted to a string
+    myObject[3] = "bar";
+    myObject["3"];
+    myObject[true] = "foo";
+    myObject["true"];
+    though Arrays behave differently
+
+-computed property names
+    var myObject = {
+	    [prefix + "baz"]: "world"
+    };
+
+-Symbols - for adding properties into objects without breaking any
+    pre-existing code (??)
+
+-JSONable objects copy:
+    var newObj = JSON.parse( JSON.stringify( someObj ) )
+
+
+-ES6
+    var newObj = Object.assign( {}, myObject ); // target, source ; returns
+        target object
+
+-Property Descriptors
+    Object.defineProperty();
+    var myObject = { 
+        a: 2
+    };
+
+    Object.getOwnPropertyDescriptor( myObject, "a" );
+    //    value: 2,
+    //    writable: true, - can change value
+    //    enumerable: true, - appears in for in loop
+    //    configurable: true - can change configuration - e.g. read-only
+    //      mode of the property or enumerability
+    //      property can be writable but not configurable
+    //      changing 'configurable' is one way, cannot be undone
+
+    var myObject = {};
+
+    Object.defineProperty( myObject, "a", {
+        value: 2,
+        writable: true,
+        configurable: true,
+        enumerable: true
+    } );
+
+    strict mode - doing a forbidden operation (modifying a non-writable
+    property) fails with TypeError. when not in strict mode - silently
+    ignores the assignment (!!)
+    
+    Object.preventExtensions() - no other properties can be added
+    Object.seal() - does preventExtensions plus configurable: false, can
+        modify values
+    Object.freeze() - calls .seal() plus writable: false
+
+
+-Getters, Setters [[Get]], [[Put]] (accessor descriptors)
+    get, set descriptors defined not per objecet basis but on per-property
+        basis
+
+-Existence
+    myObject.hasOwnProperty( "a" );	// true
+    The in operator will check to see if the property is in the object, or if
+    it exists at any higher level of the [[Prototype]] chain object traversal
+    (see Chapter 5). By contrast, hasOwnProperty(..) checks to see if only
+    myObject has the property or not, and will not consult the [[Prototype]]
+    chain.
+    Object.prototype.hasOwnProperty.call(myObject,"a")
+
+    for (var k in myObject) {
+    	console.log( k, myObject[k] );
+    }
+    myObject.propertyIsEnumerable( "a" );
+
+    Object.keys(o);
+
+-Iteration
+    ES5 also added several iteration helpers for arrays, including
+    forEach(..), every(..), and some(..)
+
+    @@iterator internal property of an object using an ES6
+        Symbol: Symbol.iterator
+

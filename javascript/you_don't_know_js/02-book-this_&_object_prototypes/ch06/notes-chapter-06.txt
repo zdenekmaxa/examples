@@ -1,0 +1,55 @@
+Chapter 6 - Behaviour Delegation
+
+=============================================================================
+
+OLOO - Object Linked to Other Objects - prototypal-based linkage ensuring
+    behaviour (properties links) between objects, linkage known from OOP style
+    programming which brings inheritance
+    in JS, having just objects, the linkage is ensured by prototype chain
+
+very much against doing it OOP class style (since there are no clases and
+instances in JS) ; doesn't like class, new, instanceof
+
+.constructor.name access at some point had a bug in Chrome dev tools ... 
+    things that behaved differenly cross-engine
+
+it's a bit of argument-stretching stating that OLOO style,
+compared to confusing and misleading OOP style, suggests on its own better
+naming of functions ...
+
+
+OLOO leads to separatation of creation of initializatio - may be useful
+    for testing
+
+-describes
+
+
+Introspection:
+
+function Foo() {
+	// ...
+}
+var a1 = new Foo();
+Foo.prototype (not Foo!) is in the [[Prototype]] chain of a1
+
+a1 instanceof Foo // true - confusingly ; a1 pretends to be instance of the
+    Foo "class"
+
+
+var Foo = { /* .. */ };
+var Bar = Object.create( Foo );
+var b1 = Object.create( Bar );
+Foo.isPrototypeOf( Bar ); // true
+Object.getPrototypeOf( Bar ) === Foo; // true
+Foo.isPrototypeOf( b1 ); // true
+Bar.isPrototypeOf( b1 ); // true
+
+We're not using instanceof anymore, because it's confusingly pretending to
+have something to do with classes.
+
+Yet again, we see that OLOO is simpler than (but with all the same power of)
+class-style coding in JavaScript.
+
+
+-use delegations instead of class style
+-

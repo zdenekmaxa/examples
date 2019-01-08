@@ -173,6 +173,42 @@ def test_summer(inpt, output):
     assert sum(inpt) == output
 
 
+def test_filter():
+    """
+    Test DataFrame filter
+
+    """
+    df = pd.DataFrame(dict(aa=[1, 2], bb=[3, 4], ab=[5, 6], ba=[7, 8]))
+    # df
+    #        aa  bb  ab  ba
+    #     0   1   3   5   7
+    #     1   2   4   6   8
+    assert df.filter(regex="c|d").columns.values.tolist() == []
+    assert df.filter(regex="c|d").index.tolist() == [0, 1]
+    assert df.filter(regex="^a|c|d").columns.values.tolist() == ["aa", "ab"]
+
+
+def selection(df):
+    """
+    Test selection options.
+    >>> df = pd.DataFrame(dict(a=[1, 2], b=[3, 4]))
+    >>> selection(df)
+       a  b
+    1  2  4
+
+    """
+    s1 = df[df["a"] > 1]
+    s2 = df[df.a > 1]
+    assert s1.equals(s2)
+    s2 = df.loc[df["a"] > 1, :]
+    assert s1.equals(s2)
+    s2 = df.loc[df.a > 1, :]
+    assert s1.equals(s2)
+    s2 = df.query("a > 1")
+    assert s1.equals(s2)
+    return s1
+
+
 if __name__ == "__main__":
     # when run directly via doctest: python module.py
     # with -v prints all tired values and expected output

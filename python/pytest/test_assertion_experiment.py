@@ -23,17 +23,18 @@ in the directory.
 
 class TestCaseMine(object):
     def setup_method(self, method):
-        print "setup_method, test case being run: %s" % method.__name__
+        print(f"setup_method, test case being run: {method.__name__}")
         try:
             assert 1 == 2
         except AssertionError:
-            print "caught AssertionError in setup_method"
+            print("caught AssertionError in setup_method")
 
     def teardown_method(self, method):
-        print "teardown_method, test case finished: %s" % method.__name__
+        print(f"teardown_method, test case finished: {method.__name__}")
 
     def test_case_1(self):
         try:
             assert 3 == 4
         except AssertionError:
-            print "caught AssertionError in test_case_1"
+            print("caught AssertionError in test_case_1")
+

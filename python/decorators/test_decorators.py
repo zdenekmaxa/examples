@@ -1,4 +1,41 @@
+"""
+Python decorator examples, experiments.
+
+https://www.datacamp.com/community/tutorials/decorators-python
+
+"""
+
 import pytest
+
+
+def uppercase_decorator(func):
+    """
+    using decorator without Python decorator syntax (@ sign)
+
+    """
+    def wrapper(arg):
+        """
+        for general purpose, the signature would be *args, **kwargs
+
+        """
+        uppercase = func(arg).upper()
+        return uppercase
+    return wrapper
+
+
+def repeater_without_decorator_syntax(arg):
+    return arg
+
+
+@uppercase_decorator
+def repeater(arg):
+    return arg
+
+
+def test_repeater():
+    # using decorator without Python decorator syntax(@ sign)
+    assert uppercase_decorator(repeater_without_decorator_syntax)("hello there") == "HELLO THERE"
+    assert repeater("hey hey") == "HEY HEY"
 
 
 def memoize(func):
@@ -37,7 +74,7 @@ def test_factorial(inp, result):
                                                  (5, 120, True),
                                                  ])
 def test_memoized_factorial(mocker, inp, result, cached):
-    mock_factorial = mocker.patch("test_closures.factorial")
+    mock_factorial = mocker.patch("test_decorators.factorial")
     mock_factorial.return_value = result
     memoized_factorial(inp)
     from_cache = True if mock_factorial.call_count == 0 else False
@@ -46,9 +83,9 @@ def test_memoized_factorial(mocker, inp, result, cached):
 
 def notification_decorator(func):
     def wrapper(*args, **kwargs):
-        print(f"function {func} to be called with args {args} {kwargs}")
+        print(f"decorator: function {func} to be called with args {args} {kwargs}")
         r = func(*args, **kwargs)
-        print(f"function {func} finished")
+        print(f"decorator: function {func} finished")
         return r
     return wrapper
 
@@ -62,9 +99,10 @@ def function_logic(a, b, c=[]):
 def notification_decorator_parametrized(decorator_arg):
     def the_decorator(func):
         def wrapper(*args, **kwargs):
-            print(f"function {func} to be called with args {args} {kwargs}, decorator arg: {decorator_arg}")
+            print(f"decorator: function {func} to be called with args {args} {kwargs}, decorator arg: {decorator_arg}")
             r = func(*args, **kwargs)
-            print(f"function {func} finished")
+            print(f"decorator: function {func} finished")
+            r += 10
             return r
         return wrapper
     return the_decorator
@@ -74,3 +112,27 @@ def notification_decorator_parametrized(decorator_arg):
 def function_logic_another(a, b, c=[]):
     print(f"work with {a}, {b} and {c} ...")
     return a+b
+
+
+def test_function_logic_another():
+    assert function_logic_another(1, 2) == 13
+
+
+"""
+Signature preserving decorator
+The decorator notification_decorator_parametrized works OK in simple cases like this.
+
+In the context of pytest (necessity of decorating a pytest test case with a parametrized decorator),
+this approach would not work since the *args, **kwargs would be passed empty (likely due to
+mechanism for passing fixtures in the context of pytest). What works is signature preserving decorator. 
+
+"""
+
+from decorator import decorator
+
+def signature_preserving_parametrized_decorator(arg1, arg2):
+    @decorator
+    def wrapper(func, *args, **kwargs):
+        # *args, **kwargs are available
+        func(*args, **kwargs)
+    return wrapper

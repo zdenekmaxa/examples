@@ -5,6 +5,8 @@ https://www.datacamp.com/community/tutorials/decorators-python
 
 """
 
+from decorator import decorator
+
 import pytest
 
 
@@ -118,19 +120,16 @@ def test_function_logic_another():
     assert function_logic_another(1, 2) == 13
 
 
-"""
-Signature preserving decorator
-The decorator notification_decorator_parametrized works OK in simple cases like this.
-
-In the context of pytest (necessity of decorating a pytest test case with a parametrized decorator),
-this approach would not work since the *args, **kwargs would be passed empty (likely due to
-mechanism for passing fixtures in the context of pytest). What works is signature preserving decorator. 
-
-"""
-
-from decorator import decorator
-
 def signature_preserving_parametrized_decorator(arg1, arg2):
+    """
+    Signature preserving decorator
+    The decorator notification_decorator_parametrized works OK in simple cases like this.
+
+    In the context of pytest (necessity of decorating a pytest test case with a parametrized decorator),
+    this approach would not work since the *args, **kwargs would be passed empty (likely due to
+    mechanism for passing fixtures in the context of pytest). What works is signature preserving decorator.
+
+    """
     @decorator
     def wrapper(func, *args, **kwargs):
         # *args, **kwargs are available

@@ -1,7 +1,6 @@
 """
 Pandas experiments. Some via doctest some direct unit test cases.
 
-
 - pytest.mark.skip doesn't work here with doctest
 
 - doctest skip - can't find out how to specify a test to skip
@@ -11,7 +10,10 @@ Pandas experiments. Some via doctest some direct unit test cases.
 
 - pytest verbose (-v) doesn't work to show tried values via doctest
 
+- python test_various.py -v prints all tried values via doctest
+
 """
+
 
 import doctest
 
@@ -150,8 +152,4 @@ def selection(df):
 
 
 if __name__ == "__main__":
-    # when run directly via doctest:
-    #   python module.py
-    #   python module.py -v  (prints all tried values and expected output)
     doctest.testmod()
-

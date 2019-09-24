@@ -21,6 +21,11 @@ import pytest
 import pandas as pd
 
 
+@pytest.fixture
+def df():
+    return pd.DataFrame(dict(a=[1, 2], b=[3, 4]))
+
+
 def update(df1, df2):
     """
     update existing column in the df with new values
@@ -33,6 +38,7 @@ def update(df1, df2):
     1  2  7
 
     only existing columns in the original df are updated
+
     >>> df1 = pd.DataFrame(dict(a=[1, 2], b=[3, 4]))
     >>> df2 = pd.DataFrame(dict(b=[6, 7], c=[8, 9]))
     >>> update(df1, df2)
@@ -56,6 +62,7 @@ def update(df1, df2):
 def update_via_loc(df1, df2):
     """
     indexing must match
+
     >>> df1 = pd.DataFrame(dict(a=[1, 2], b=[3, 4]))
     >>> df2 = pd.DataFrame(dict(a=[1, 2], b=[5, 6], c=[7, 8]))
     >>> update_via_loc(df1, df2)
@@ -133,6 +140,7 @@ def test_filter():
 def selection(df):
     """
     Test selection options.
+
     >>> df = pd.DataFrame(dict(a=[1, 2], b=[3, 4]))
     >>> selection(df)
        a  b
@@ -149,6 +157,38 @@ def selection(df):
     s2 = df.query("a > 1")
     assert s1.equals(s2)
     return s1
+
+
+def sum_axis_argument(df, axis):
+    """
+    Test axis argument:
+        0 means operation applied to columns, column names are in result index, sum of columns
+        1 means operation applied to rows, result index is the same as in the source
+
+    >>> df = pd.DataFrame(dict(a=[1, 2], b=[3, 4]))
+    >>> sum_axis_argument(df, None)
+    a    3
+    b    7
+    dtype: int64
+
+    >>> sum_axis_argument(df, 0)
+    a    3
+    b    7
+    dtype: int64
+
+    Source index preserved, operation applied to rows, sum of rows.
+
+    >>> sum_axis_argument(df, 1)
+    0    4
+    1    6
+    dtype: int64
+
+    Apply to series, only axis=0 is allowed, axis=1 - ValueError
+    >>> sum_axis_argument(df.a, 0)
+    3
+
+    """
+    return df.sum(axis=axis)
 
 
 if __name__ == "__main__":

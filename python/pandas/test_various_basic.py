@@ -1,5 +1,7 @@
 """
-Pandas experiments. Some via doctest some direct unit test cases.
+Pandas experiments. Basic ones.
+
+Some via doctest some direct unit test cases.
 
 - pytest.mark.skip doesn't work here with doctest
 

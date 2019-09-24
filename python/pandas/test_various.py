@@ -1,4 +1,20 @@
+"""
+Pandas experiments above the basic level.
+
+"""
+
+
 import pandas as pd
+
+
+def test_define_values_by_dict():
+    df = pd.DataFrame(dict(a=[1, 2, 3, 4], b=[5, 6, 7, 8]))
+    repl = {1: 11, 2: 22, 4: 55}
+    df["new_a"] = df.a.map(repl)
+    assert df.loc[df.new_a.notna(), "new_a"].to_list() == [11, 22, 55]
+    # the same done via assign and lambda
+    df = df.assign(new_aa=lambda x: x["a"].map(repl))
+    assert df.loc[df.new_aa.notna(), "new_aa"].to_list() == [11, 22, 55]
 
 
 def test_replace_series_values_by_map_file():

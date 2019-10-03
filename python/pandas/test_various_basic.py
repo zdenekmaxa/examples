@@ -12,7 +12,7 @@ Some via doctest some direct unit test cases.
 
 - pytest verbose (-v) doesn't work to show tried values via doctest
 
-- python test_various.py -v prints all tried values via doctest
+- python test_various_basic.py -v prints all tried values via doctest
 
 """
 

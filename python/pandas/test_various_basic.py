@@ -139,6 +139,18 @@ def test_filter():
     assert df.filter(regex="^a|c|d").columns.values.tolist() == ["aa", "ab"]
 
 
+def test_filter_inversion():
+    """
+    DataFrame.filter(regex= ...) inversion.
+    Din't find a way to invert multiple items like "^(?!a) | ^(?!b)" - this
+        does not work, would have to chain filter expressions.
+
+    """
+    df = pd.DataFrame(dict(aa=[1, 2], bb=[3, 4], ab=[5, 6], ba=[7, 8], cb=[9, 9]))
+    assert df.filter(regex="^(?!a)").columns.to_list() == ["bb", "ba", "cb"]
+    assert df.filter(regex="^(?!a)").filter(regex="^(?!b)").columns == ["cb"]  # .to_list() not necessary
+
+
 def selection(df):
     """
     Test selection options.

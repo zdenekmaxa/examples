@@ -8,12 +8,17 @@ import pandas as pd
 
 
 def test_simple_map_function_1():
+    """
+    Series(map(dict | function | Series))
+    https://pandas.pydata.org/pandas-docs/stable//reference/api/pandas.Series.map.html
+
+    """
     df = pd.DataFrame(dict(a=[1, 2, 3, 4], b=[5, 6, 7, 8]))
     mask = df.a.map(lambda x: x > 2)
     assert df.loc[mask, "a"].to_list() == [3, 4]
 
 
-def test_simple_map_function_1():
+def test_simple_map_function_2():
     df = pd.DataFrame(dict(a=['1', '2', 3, 4], b=[5, 6, 7, 8]))
     mask = df.a.map(type) == str
     assert df.loc[mask, "a"].to_list() == ['1', '2']
@@ -49,3 +54,16 @@ def test_replace_series_values_by_map_file():
     df = df.drop(columns=["_a"])
     assert df.loc[["i2", "i4"], "a"].to_list() == [0, 9]
 
+
+def test_apply():
+    """
+    DataFrame.apply(self, func, axis=0, ...
+        function to apply to each column or row
+
+    """
+    df = pd.DataFrame(dict(a=[1, 2, 3, 4], b=[5, 6, 7, 8]))
+    assert df.a.apply(lambda x: x+1).to_list() == [2, 3, 4, 5]
+    # axis=0 is default, means apply to columns
+    assert df.apply(sum).to_dict() == dict(a=10, b=26)
+    # applied to rows
+    assert df.apply(sum, axis=1).to_list() == [6, 8, 10, 12]

@@ -3,6 +3,9 @@ SQLAlchemy experiment 2021-09-07
 
 Didn't work with MySQL database, failed with cryptic Python failure
     when creating the table (model). With PyMySQL 1.0.2
+    SQLAlchemy 1.4.23 and PyMySQL 1.0.2
+    with MySQL server: mysql-8.0.25-linux-glibc2.17-x86_64-minimal
+
 Worked out-of-the-box with PostgreSQL+psycopg2 - model created, entity
     inserted.
 
